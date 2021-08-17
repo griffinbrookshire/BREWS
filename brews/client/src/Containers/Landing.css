@@ -1,0 +1,26 @@
+.user-menu > a {
+    color: #ffffffbf;
+  }
+
+  .user-menu > a:hover {
+      color: #ffffff;
+  }
+
+  .user-menu > a:active {
+    color: #ffffff;
+}
+
+.user-menu > a:focus {
+    color: #ffffff;
+}
+
+.form-control {
+    font-size: 0.9rem !important;
+}
+
+.btn-xs {
+    padding: 1px 5px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+}

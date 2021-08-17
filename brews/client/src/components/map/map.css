@@ -1,0 +1,154 @@
+.map-h2 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    padding: 20px;
+    padding-left: 10px;
+    text-align: center;
+  }
+  
+  .google-map {
+    width: 100%;
+    height: calc(100vh);
+  }
+  
+  .pin {
+    display: flex;
+    align-items: center;
+    width: 180px;
+    color: var(--main-blue);
+  }
+  
+  .pin-icon {
+    font-size: 3rem;
+  }
+  
+  .pin-text {
+    font-size: 1.3em;
+    background-color: white;
+    padding: 8px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: gray;
+  }
+  
+  @media screen and (min-width: 799px) {
+    .google-map {
+      height: calc(100vh);
+    }
+  
+    .map-h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+    }
+  
+    .pin {
+      width: 15vw;
+    }
+  
+    .pin-icon {
+      font-size: 4rem;
+      color: #20f00d;
+    }
+  }
+
+
+  .circle {
+    background-color: #000000;
+    border-radius: 50%;
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+    border-width: 1px;
+    border-style: solid;
+    height: 2.5em;
+    position: relative;
+    width: 2.5em;
+  
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  
+  .circleText {
+    text-align: center;
+    height: 50%;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+  }
+  
+  .hover {
+    background-color: #0dcaf0;
+    color: #000000;
+  }
+
+  .detail-container {
+    position: absolute;
+    left: 35px;
+    top: 100px;
+    padding: 10px;
+    background-color: white;
+    width: 300px;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #212529;
+    border-radius: 4px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+
+  .details-no-data {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.8rem;
+    color: gray;
+  }
+
+  .brewery-list-item {
+    border-bottom: #cfcfcf 1px solid;
+    /* margin-bottom: 0.5rem; */
+    padding: 0.5rem;
+    cursor: pointer;
+  }
+
+  .brewery-list-item:hover {
+    background-color: #e7e7e7;
+  }
+  
+  .brewery-list-number  {
+    height: 25px;
+    width: 25px;
+    background-color: #212529;
+    color: #0dcaf0;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .brewery-list-title {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    display: inline;
+  }
+
+  .brewery-list-item-col {
+    margin-left: 0.5rem;
+  }
+
+  .beer_item {
+    font-size: 0.9rem;
+    border-bottom: #cfcfcf 1px solid;
+    padding: 0.5rem;
+
+  }
+
+  .beer_type {
+    font-size: 0.7rem;
+    background-color: rgb(155, 153, 153);
+    color: white;
+    float: right;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 5px;
+  }
