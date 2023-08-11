@@ -1,4 +1,4 @@
-FROM node:12.18.1
+FROM --platform=linux/amd64 node:12.18.1
 
 WORKDIR /brews
 
