@@ -3,7 +3,7 @@ const router = express.Router();
 
 const Brewery = require('../../models/Brewery');
 
-// @route   GET api/breweries/search?cit=?
+// @route   GET api/breweries/search?city=?
 // @desc    Return list of breweries via search
 // @access  Public
 router.get('/search', async (req, res) => {

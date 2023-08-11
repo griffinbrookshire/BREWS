@@ -16,7 +16,7 @@ const Map = ({ handleBrewerySelect, center, location, zoomLevel, points }) => (
   <div className="map">
     <div className="google-map">
       <GoogleMapReact
-        bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
+        bootstrapURLKeys={{ key: "AIzaSyCOLA2dS0_zw0XW7XBdH4V8cO4qOzeWEOc" }}
         center={center}
         zoom={zoomLevel}
       >

@@ -18,7 +18,7 @@ import axios from 'axios';
 
 import "./Landing.css";
 
-const mapsclient = client.createClient({key:process.env.REACT_APP_GOOGLE_API_KEY})
+const mapsClient = client.createClient({key: "AIzaSyCOLA2dS0_zw0XW7XBdH4V8cO4qOzeWEOc" })
 
 export default function Landing() {
     const history = useHistory();
@@ -149,7 +149,7 @@ export default function Landing() {
         clearBrewerySelect()
 
         if (searchType === 'Location') {
-            mapsclient.geocode({address: searchText},
+            mapsClient.geocode({address: searchText},
                 (error, response) => handleGeocodeResponse(response.json.results)
             );
         } else if (searchType === 'Beer Type') {
