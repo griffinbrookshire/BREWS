@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ButtonGroup, Button, Badge } from 'react-bootstrap'
-import { Icon, InlineIcon } from '@iconify/react';
+import { ButtonGroup, Button } from 'react-bootstrap'
+import { Icon } from '@iconify/react';
 import thumbUpOutline from '@iconify/icons-mdi/thumb-up-outline';
 import thumbUp from '@iconify/icons-mdi/thumb-up';
 
@@ -9,23 +9,20 @@ import './map.css'
 
 function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweries, breweryDetail, breweryBeers }) {
 
-    const [email, setEmail] = useState('');
-    const [likedBeers, setlikedBeers] = useState([]);
+    const [likedBeers, setLikedBeers] = useState([]);
     const [likedBreweries, setLikedBreweries] = useState([]);
     const [breweryLikeButton, setBreweryLikeButton] = useState(null);
     const [breweryBeerList, setBreweryBeerList] = useState(null);
   
-    const [username, setUsername] = useState(
-      JSON.parse(localStorage.getItem('email')).data
-    );
+    const username = JSON.parse(localStorage.getItem('email')).data;
 
     const setLikedBeer = async function(beer_name) {
-        const response = await axios.put(`/api/users/${username}/beers`, { name: beer_name });
-        setlikedBeers(null); //trigger refresh of like beers
+        await axios.put(`/api/users/${username}/beers`, { name: beer_name });
+        setLikedBeers(null); //trigger refresh of like beers
     }
 
     const setLikedBrewery = async function (brewery_name) {
-        const response = await axios.put(`/api/users/${username}/breweries`, { name: brewery_name });
+        await axios.put(`/api/users/${username}/breweries`, { name: brewery_name });
         setLikedBreweries(null); //trigger refresh of like button
     }
 
@@ -62,7 +59,6 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
 
         if(likedBeers != null) { 
 
-            let liked = false;
             for(let i = 0; i < likedBeers.length; i++) {
                 let beer = likedBeers[i];
                 if(beer_name === beer.beer.name) {
@@ -79,9 +75,9 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
         if((breweryBeers != null)) {
         setBreweryBeerList(breweryBeers.map(({ name, type }) => {
             return (
-                <div key={name} class="">
-                    <div class="beer_item">
-                        {name}                         <span class="beer_type">{type}</span>
+                <div key={name} className="">
+                    <div className="beer_item">
+                        {name}                         <span className="beer_type">{type}</span>
 
                         <br/>
                         <div>
@@ -129,7 +125,7 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
             if(JSON.stringify(response.data.likedBeers) === JSON.stringify(likedBeers)) {
                 //no need to update state
             } else {
-                setlikedBeers(response.data.likedBeers);
+                setLikedBeers(response.data.likedBeers);
             }
 
             updateBreweryBeerList();
@@ -138,7 +134,7 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
     }, [breweryBeers, likedBeers]);
 
   return (
-    <div class="detail-container">
+    <div className="detail-container">
 
         {/* Brewery List view -- when a search has returned breweries */}
         {(breweries.length > 0 && breweryDetail == null)  &&
@@ -153,10 +149,10 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
         {(breweries.length > 0 && breweryDetail == null)  &&
         breweries.map(({ displayid, name, address }) => {
             return (
-                <div key={displayid} class="brewery-list-item row" onClick={function(){handleBrewerySelect(address.coords.lat, address.coords.lng, name)}}>
-                    <div class="col-1"> <span class="brewery-list-number">{displayid}</span></div>
-                    <div class="col-10 brewery-list-item-col"> 
-                        <h4 class="brewery-list-title">{name}</h4> 
+                <div key={displayid} className="brewery-list-item row" onClick={function(){handleBrewerySelect(address.coords.lat, address.coords.lng, name)}}>
+                    <div className="col-1"> <span className="brewery-list-number">{displayid}</span></div>
+                    <div className="col-10 brewery-list-item-col"> 
+                        <h4 className="brewery-list-title">{name}</h4> 
                         <div>{address.number} {address.street} {address.zip} </div>
                     </div>
                 </div>
@@ -167,7 +163,7 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
         {/* Brewery Detail View -- when a brewery has been selected  */}
         {(breweryDetail != null) &&
             <div>
-                <p class="mb-0">Selected brewery:</p>
+                <p className="mb-0">Selected brewery:</p>
                 <h4>{breweryDetail.name}</h4>
                 { breweryLikeButton }
                 <div>{breweryDetail.address.number} {breweryDetail.address.street} {breweryDetail.address.zip} </div>
@@ -177,7 +173,7 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
 
         {/* Beer list (if brewery detail view is active) */}
         {(breweryDetail != null && breweryBeers != null) &&
-            <div class="mb-3">
+            <div className="mb-3">
                 Beers available:
             </div>
         }
@@ -188,7 +184,7 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
         }
 
         {(breweryDetail != null) &&
-            <div class="mt-3">
+            <div className="mt-3">
                 <ButtonGroup aria-label="Basic example">
                     <Button variant="outline-secondary" size="sm" onClick={function(){clearBrewerySelect()}}>Back</Button>
                 </ButtonGroup>
@@ -198,10 +194,10 @@ function MapDetail ({ clearBrewerySelect, handleBrewerySelect, location, breweri
         {/* No brewery list or details available */}
         {(breweries.length === 0 && breweryDetail == null)  &&
         <div>
-        <div class=""><b>Welcome to BREWS</b>!<br/>Enter your location in the search bar and select <em>Search</em> to find nearby breweries</div>
+        <div className=""><b>Welcome to BREWS</b>!<br/>Enter your location in the search bar and select <em>Search</em> to find nearby breweries</div>
         <hr/>
 
-            <div class="details-no-data">
+            <div className="details-no-data">
                 Nothing to display
             </div>
             </div>

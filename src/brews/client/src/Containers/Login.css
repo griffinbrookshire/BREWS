@@ -1,7 +1,7 @@
 @media all and (min-width: 700px) {
 
     .Login::before {
-        background-image: url('../images/pexels-cottonbro-5530221.jpg');
+        background-image: url('../images/brewery-background.jpg');
         content: "";
         background-size: cover;
         position: absolute;
@@ -44,6 +44,10 @@
     .Register:hover {
         color: white;
         text-decoration: underline;
+    }
+
+    .logo {
+        margin-bottom: 10px;
     }
 
     .Logoname {

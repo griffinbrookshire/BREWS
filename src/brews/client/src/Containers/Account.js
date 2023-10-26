@@ -1,19 +1,11 @@
-import './Account.css'; //Add if needed
-import React, { useEffect, useRef, useState } from 'react';
-import { useHistory, Link } from 'react-router-dom';
+import './Account.css';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Navbar,
-  Nav,
   NavDropdown,
   Form,
-  FormControl,
-  Button,
   Container,
-  Overlay,
-  Modal,
-  CloseButton,
-  ListGroup,
-  ListGroupItem,
   Col,
   Row, FormGroup,
 } from 'react-bootstrap';
@@ -22,21 +14,10 @@ import accountIcon from '@iconify/icons-mdi/account';
 import axios from 'axios';
 
 export default function Account() {
-  const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const [email, setEmail] = useState('');
   const [likedBeers, setlikedBeers] = useState([]);
   const [likedBreweries, setLikedBreweries] = useState([]);
-
-  const [username, setUsername] = useState(
-    JSON.parse(localStorage.getItem('email')).data
-  );
-
-  const target = useRef(null);
-  const history = useHistory();
+  const username = JSON.parse(localStorage.getItem('email')).data;
 
   useEffect(() => {
     async function getLikedBeers() {
@@ -50,41 +31,8 @@ export default function Account() {
     getLikedBeers();
     getLikedBreweries();
   }, []);
-  //const getLikedBeers = async function () {
-  //const likedBeerList = await axios.get('/'+Username.data+'/beers');
-  //setlikedBeers(likedBeerList);
-  //console.log(likedBeers);
-  //console.log("hello");
-  //console.log(likedBeerList);
-  //console.log("hi");
-  //}
-  //likedBeers();
-
-  const list = {
-    items: ['List Item 1', 'List Item 2', 'List Item 3'],
-  };
-
-  const state = {
-    listitems: ['List Item 1', 'List Item 2', 'List Item 3'],
-  };
-
-  const arr = ['List Item 1', 'List Item 2', 'Hello'];
-
-  function handleSubmit(event) {
-    event.preventDefault(); //Not sure what this does
-    //TODO: Add validation of user credentials. If validated, prime user data for use
-
-    let path = `/Landing`;
-    history.push(path);
-  }
 
   return (
-    //<div>
-      //{console.log(likedBeers)}
-      //{likedBeers.map((beer) => (
-      //  <li key='{beer.beer._id}'>{beer.beer.name}</li>
-      //))}
-    //</div>
     <div className={'Account'}>
       <Navbar
         className={'my-navbar'}
@@ -95,16 +43,16 @@ export default function Account() {
       >
         <Container>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
-          <Navbar.Brand className='' as={Link} to={'/'}>
+          <Navbar.Brand className='' as={Link} to={'/Landing'}>
             <img
-              src='/Brews.svg'
+              src='/logo.png'
               width='30'
               height='30'
               className='d-inline-block align-top'
               alt='BREWS logo'
               style={{ marginRight: '5px' }}
             />
-            <span class='ml-2'>BREWS</span>
+            <span className='ml-2'>BREWS</span>
           </Navbar.Brand>
 
           <NavDropdown
@@ -119,7 +67,7 @@ export default function Account() {
             <NavDropdown.Item href='/Account'>Profile</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item
-              href='/'
+              href='/Login'
               onClick={() => {
                 localStorage.clear();
               }}

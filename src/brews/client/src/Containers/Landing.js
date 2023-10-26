@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
     Navbar,
     Nav,
@@ -12,7 +12,7 @@ import {
 import MapSection from '../components/map/Map';
 import MapDetail from '../components/map/MapDetail'
 import client from '@google/maps';
-import { Icon, InlineIcon } from '@iconify/react';
+import { Icon } from '@iconify/react';
 import accountIcon from '@iconify/icons-mdi/account';
 import axios from 'axios';
 
@@ -21,13 +21,9 @@ import "./Landing.css";
 const mapsClient = client.createClient({key: "AIzaSyCOLA2dS0_zw0XW7XBdH4V8cO4qOzeWEOc" })
 
 export default function Landing() {
-    const history = useHistory();
-    const Username = JSON.parse(localStorage.getItem('email'));
 
-    //location search input
+    const username = JSON.parse(localStorage.getItem('email'));
     const [searchText, setSearchText] = useState("");
-
-    //search type
     const [searchType, setSearchType] = useState("Location")
 
     //search location lat, lon, used to draw pin on map
@@ -67,7 +63,7 @@ export default function Landing() {
     const [breweryBeers, setBreweryBeers] = useState(null);
     
     const handleGeocodeResponse = function(response) {
-        if(response != undefined && response != null && response.length > 0) {
+        if(response !== undefined && response !== null && response.length > 0) {
             let location_label = "";
             let lat = null;
             let lng = null;
@@ -92,7 +88,7 @@ export default function Landing() {
                 lng = geocode_resp.geometry.location.lng;
             }
 
-            if(location_label != "" && lat != null && lng != null) {
+            if(location_label !== "" && lat !== null && lng !== null) {
                 setLocation({
                     address: "Search Location: "+location_label,
                     lat: lat,
@@ -112,7 +108,6 @@ export default function Landing() {
         }
     }
 
-    //TOOD: for now we're searching by city name, we may eventually want to search by radius
     const getBreweries = async function(city) {
         const response = await axios.get('/api/breweries/search?city='+city);
 
@@ -228,18 +223,18 @@ export default function Landing() {
     }
 
     const findBeerByAttribute = (attribute) => {
-        if (breweryBeers != null) {
+        if (breweryBeers !== null) {
 
             //search selected brewery for beer with this attribute
             let recommended = [];
             for(const beer of breweryBeers) {
                 for(const attr of beer.attributes) {
-                    if (attribute == attr) {
+                    if (attribute === attr) {
                         recommended.push(beer.name);
                     }
                 }
             }
-            if (recommended.length == 0) {
+            if (recommended.length === 0) {
 
                 //choose random beer found in brewery if non match attribute
                 const random = Math.floor(Math.random()*breweryBeers.length);
@@ -279,6 +274,7 @@ export default function Landing() {
                         hash.set(attribute_list[i], 1);
                     }
                 }
+
                 //find max key value
                 var max_count = 0, main_attribute = -1;
                 hash.forEach((value, key) => {
@@ -287,11 +283,10 @@ export default function Landing() {
                         max_count = value;
                     }
                 });
-                const other_attributes = [...hash.keys()];
 
                 //search selected brewery to see if beers have attribute
                 let recommended_beers = findBeerByAttribute(main_attribute);
-                if (recommended_beers != null) {
+                if (recommended_beers !== null) {
                     handleRecommend('Suggested beer:\n'+recommended_beers);
                 }
             }
@@ -317,17 +312,17 @@ export default function Landing() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Brand className="" as={Link} to={"/"}>
                     <img
-                        src="/Brews.svg"
+                        src="/logo.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
                         alt="BREWS logo"
                         style={{ marginRight: '5px' }}
                     />
-                    <span class="ml-2">BREWS</span>
+                    <span className="ml-2">BREWS</span>
                 </Navbar.Brand>
                     <Navbar.Collapse id="basic-navbar-nav" className="">
-                        <Nav className="" onClick={()=>getRecommendation(Username.data)}>
+                        <Nav className="" onClick={()=>getRecommendation(username.data)}>
                             <Button variant="outline-info">Find Me A Beer</Button>
                         </Nav>
 
@@ -353,7 +348,7 @@ export default function Landing() {
 
                     </Navbar.Collapse>
 
-                    <NavDropdown title={<div style={{display: "inline-block"}}><Icon icon={accountIcon} /> {Username.data} </div>} id="basic-nav-dropdown" className="justify-content-end user-menu">
+                    <NavDropdown title={<div style={{display: "inline-block"}}><Icon icon={accountIcon} /> {username.data} </div>} id="basic-nav-dropdown" className="justify-content-end user-menu">
                         <NavDropdown.Item href="/Account">Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item href="/" onClick={() => {localStorage.clear()}}>Logout</NavDropdown.Item>

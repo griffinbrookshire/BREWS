@@ -1,8 +1,7 @@
-//Login boilerplate from https://serverless-stack.com/chapters/create-a-login-page.html
 import "./Login.css";
 import React, { useState } from "react";
-import { useHistory, Link } from "react-router-dom";
-import {Navbar, Nav, NavDropdown, Form, Button, Container} from "react-bootstrap";
+import { useHistory } from "react-router-dom";
+import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
 export default function Login() {
@@ -39,14 +38,14 @@ export default function Login() {
         <div className={"Login"}>
             <Form onSubmit={handleSubmit}>
                 <img
-                    src="/Brews.svg"
+                    src="/logo.png"
                     width="50"
                     height="50"
-                    className=""
+                    className="logo"
                     alt="BREWS logo"
                 />
                 <span className="Logoname">BREWS</span>
-                <div className="instructions">Welcome to the Brewery REcommendation for Walk-in and Enjoying System. Login with your email and password, or create an account to begin.</div>
+                <div className="instructions">Brewery REcommendations With Satisfaction</div>
 
                 <Form.Group className="mt-2" size={"lg"} controlId={"email"}>
                     <Form.Label>Email</Form.Label>
@@ -69,7 +68,7 @@ export default function Login() {
                     Login
                 </Button>
                 <Form.Text hidden={invalid}>Invalid Credentials</Form.Text>
-                <div className="mt-3">Not registered?<a class="Register" href="#">Create an account</a></div>
+                <div className="mt-3">Not registered?<a className="Register" href="">Create an account</a></div>
             </Form>
         </div>
     );
